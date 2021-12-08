@@ -44,23 +44,38 @@ function User({ user, onRemove, onToggle }) {
 
 
 
+## deps 에 특정 값 넣기
 
+```js
+import React, { useEffect } from 'react';
 
+function User({ user, onRemove, onToggle }) {
+  useEffect(() => {
+    console.log('user 값이 설정됨');
+    console.log(user);
+    return () => {
+      console.log('user 가 바뀌기 전..');
+      console.log(user);
+    };
+  }, [user]);
+  return (
+  	...생략
+  )
+```
 
+- 컴포넌트가 처음 마운트 될 때에도 호출이 되고, 지정한 값이 바뀔 때에도 호출이 된다.
 
+- 언마운트시에도 호출이 되고, 값이 바뀌기 직전에도 호출이 된다.
 
+- useEffect 안에서 사용하는 상태나, props 가 있다면, useEffect 의 deps에 넣어주어야 한다. 규칙이다.
 
+- 넣지 않는다면 useEffect 에 등록한 함수가 실행 될 때 최신 props / 상태를 가리키지 않게 된다.
 
+- deps 파라미터 생략시 컴포넌트가 리렌더링 될 때마다 호출이 된다.
 
+  
 
-
-
-
-
-
-
-
-
+<img src="../images/21-12-02-useEffect/스크린샷 2021-12-08 오후 3.01.40.png" alt="스크린샷 2021-12-08 오후 3.01.40" style="zoom:50%;" />
 
 
 
